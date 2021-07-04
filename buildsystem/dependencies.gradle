@@ -23,6 +23,7 @@ ext {
     gsonVersion = '2.8.5'
     okHttpVersion = '4.9.0'
     javaxAnnotationVersion = '1.0'
+    lombokVersion = '1.18.18'
 
     //Testing
     jUnitVersion = '4.12'
@@ -44,7 +45,9 @@ ext {
 
     domainDependencies = [
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            lombok:             "org.projectlombok:lombok:${lombokVersion}"
+
     ]
 
     dataDependencies = [
