@@ -56,7 +56,8 @@ ext {
             gson:               "com.google.code.gson:gson:${gsonVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+            retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            lombok:             "org.projectlombok:lombok:${lombokVersion}"
     ]
 
     testDependencies = [

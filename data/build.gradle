@@ -36,6 +36,8 @@ dependencies {
     implementation project(':domain')
 
     compileOnly dataDependencies.javaxAnnotation
+    compileOnly dataDependencies.lombok
+    annotationProcessor dataDependencies.lombok
     implementation dataDependencies.retrofit
     implementation dataDependencies.okHttp
     implementation dataDependencies.gson
