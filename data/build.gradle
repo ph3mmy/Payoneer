@@ -43,6 +43,8 @@ dependencies {
     implementation dataDependencies.gson
     implementation dataDependencies.rxJava
     implementation dataDependencies.rxAndroid
+    implementation dataDependencies.gsonConverter
+    implementation dataDependencies.rxJavaAdapter
 
     testImplementation testDependencies.jUnit
 }

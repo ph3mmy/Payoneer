@@ -57,6 +57,8 @@ ext {
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            gsonConverter:      "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            rxJavaAdapter:      "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             lombok:             "org.projectlombok:lombok:${lombokVersion}"
     ]
 
