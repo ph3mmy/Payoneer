@@ -12,7 +12,7 @@ public class RetrofitClient {
 
     public static final String API_BASE_URL = "https://raw.githubusercontent.com/optile/checkout-android/develop/shared-test/lists/";
 
-    RetrofitClient() {}
+    public RetrofitClient() {}
 
     public <T> T create(Class<T> serviceClass) {
         return retrofit(okHttpClientBuilder()).create(serviceClass);

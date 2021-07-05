@@ -17,9 +17,10 @@ public class PaymentNetworkRepository implements PaymentRepository {
     private final PaymentApi paymentApi;
     private final PaymentEntityMapper paymentEntityMapper;
 
-    public PaymentNetworkRepository(RetrofitClient retrofitClient, PaymentEntityMapper mapper) {
-        this.paymentEntityMapper = mapper;
-        paymentApi = retrofitClient.create(PaymentApi.class);
+    public PaymentNetworkRepository() {
+        RetrofitClient retrofitClient = new RetrofitClient();
+        this.paymentEntityMapper = new PaymentEntityMapper();
+        this.paymentApi = retrofitClient.create(PaymentApi.class);
     }
 
     @Override
