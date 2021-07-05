@@ -12,6 +12,7 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     implementation domainDependencies.rxJava
+    implementation domainDependencies.javaxInject
 
     compileOnly domainDependencies.javaxAnnotation
     compileOnly domainDependencies.lombok

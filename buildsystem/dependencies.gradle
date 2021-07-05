@@ -23,6 +23,7 @@ ext {
     gsonVersion = '2.8.5'
     okHttpVersion = '4.9.0'
     javaxAnnotationVersion = '1.0'
+    javaxInjectVersion = '1'
     lombokVersion = '1.18.18'
 
     //Testing
@@ -45,6 +46,7 @@ ext {
 
     domainDependencies = [
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             lombok:             "org.projectlombok:lombok:${lombokVersion}"
 
@@ -52,6 +54,7 @@ ext {
 
     dataDependencies = [
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
             okHttp:             "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",

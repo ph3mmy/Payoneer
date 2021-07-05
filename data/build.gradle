@@ -38,6 +38,7 @@ dependencies {
     compileOnly dataDependencies.javaxAnnotation
     compileOnly dataDependencies.lombok
     annotationProcessor dataDependencies.lombok
+    implementation dataDependencies.javaxInject
     implementation dataDependencies.retrofit
     implementation dataDependencies.okHttp
     implementation dataDependencies.gson
