@@ -46,6 +46,7 @@ dependencies {
     implementation appDependencies.butterKnife
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid
+    implementation appDependencies.gson
 
     testImplementation testDependencies.jUnit
     androidTestImplementation testDependencies.jUnitExt

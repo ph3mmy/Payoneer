@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 
 public interface PaymentApi {
 
-    @GET("listresult.json")
+    @GET("optile/checkout-android/develop/shared-test/lists/listresult.json")
     Observable<PaymentNetworkEntity> getPaymentNetworks();
 
 }

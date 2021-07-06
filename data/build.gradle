@@ -40,7 +40,7 @@ dependencies {
     annotationProcessor dataDependencies.lombok
     implementation dataDependencies.javaxInject
     implementation dataDependencies.retrofit
-    implementation dataDependencies.okHttp
+    implementation dataDependencies.okHttpLogger
     implementation dataDependencies.gson
     implementation dataDependencies.rxJava
     implementation dataDependencies.rxAndroid
