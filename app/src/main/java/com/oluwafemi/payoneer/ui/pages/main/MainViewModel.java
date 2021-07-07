@@ -1,6 +1,4 @@
-package com.oluwafemi.payoneer.ui.main;
-
-import android.util.Log;
+package com.oluwafemi.payoneer.ui.pages.main;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

@@ -8,7 +8,7 @@ import com.oluwafemi.data.repository.PaymentNetworkRepository;
 import com.oluwafemi.domain.implementation.PaymentNetworkUseCaseImpl;
 import com.oluwafemi.domain.repository.PaymentRepository;
 import com.oluwafemi.domain.usecase.PaymentNetworkUseCase;
-import com.oluwafemi.payoneer.ui.main.MainViewModel;
+import com.oluwafemi.payoneer.ui.pages.main.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
 

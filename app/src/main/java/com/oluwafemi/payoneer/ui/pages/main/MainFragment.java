@@ -1,6 +1,5 @@
-package com.oluwafemi.payoneer.ui.main;
+package com.oluwafemi.payoneer.ui.pages.main;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.oluwafemi.domain.PaymentNetwork;
 import com.oluwafemi.payoneer.R;
+import com.oluwafemi.payoneer.ui.factory.UIState;
 import com.oluwafemi.payoneer.ui.vmfactory.PaymentVMFactory;
 
 import java.util.List;
@@ -41,11 +41,24 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this, new PaymentVMFactory()).get(MainViewModel.class);
-        mViewModel.uiStateLiveData.observe(getViewLifecycleOwner(), paymentNetworks -> {
-            Log.e(TAG, "onChanged: list size == " + new Gson().toJson(paymentNetworks));
-        });
+        mViewModel.uiStateLiveData.observe(getViewLifecycleOwner(), this::updateUI);
 
         mViewModel.loadPaymentNetworks();
+    }
+
+    private void updateUI(UIState<List<PaymentNetwork>> uiState) {
+        switch (uiState.status) {
+            case LOADING:
+                break;
+            case ERROR:
+                Log.e(TAG, "error: " + new Gson().toJson(uiState.error.getMessage()));
+                break;
+            case SUCCESS:
+                Log.e(TAG, "success: list size == " + new Gson().toJson(uiState.data));
+                break;
+            default:
+                break;
+        }
     }
 
 }

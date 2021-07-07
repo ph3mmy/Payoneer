@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.oluwafemi.payoneer.ui.main.MainFragment;
+import com.oluwafemi.payoneer.ui.pages.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
