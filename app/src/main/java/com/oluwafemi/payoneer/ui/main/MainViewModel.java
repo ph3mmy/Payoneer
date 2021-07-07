@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.oluwafemi.domain.PaymentNetwork;
 import com.oluwafemi.domain.usecase.PaymentNetworkUseCase;
+import com.oluwafemi.payoneer.ui.factory.UIState;
 
 import java.util.List;
 
@@ -19,26 +20,24 @@ public class MainViewModel extends ViewModel {
     public static final String TAG = MainViewModel.class.getSimpleName();
     private final PaymentNetworkUseCase paymentNetworkUseCase;
     private final CompositeDisposable compositeDisposable;
-    public MutableLiveData<List<PaymentNetwork>> paymentNetworkLiveData;
+    public MutableLiveData<UIState<List<PaymentNetwork>>> uiStateLiveData;
 
     public MainViewModel(PaymentNetworkUseCase paymentNetworkUseCase) {
         this.paymentNetworkUseCase = paymentNetworkUseCase;
         this.compositeDisposable = new CompositeDisposable();
-        this.paymentNetworkLiveData = new MutableLiveData<>();
+        this.uiStateLiveData = new MutableLiveData<>();
     }
 
     public void loadPaymentNetworks() {
         compositeDisposable.add(
                 paymentNetworkUseCase.paymentNetworks()
+                        .map(paymentNetworks -> new UIState<>(UIState.Status.SUCCESS, paymentNetworks, null))
+                        .onErrorReturn(error -> new UIState<>(UIState.Status.ERROR, null, error))
+                        .startWith(new UIState<>(UIState.Status.LOADING, null, null))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                paymentNetworks -> {
-                                    paymentNetworkLiveData.postValue(paymentNetworks);
-                                },
-                                throwable -> {
-                                    Log.e(TAG, "loadPaymentNetworks: Error == " + throwable.getMessage() );
-                                }
+                        .subscribe(uiState ->
+                                uiStateLiveData.postValue(uiState)
                         )
         );
     }

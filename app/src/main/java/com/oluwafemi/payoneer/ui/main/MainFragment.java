@@ -41,7 +41,7 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this, new PaymentVMFactory()).get(MainViewModel.class);
-        mViewModel.paymentNetworkLiveData.observe(getViewLifecycleOwner(), paymentNetworks -> {
+        mViewModel.uiStateLiveData.observe(getViewLifecycleOwner(), paymentNetworks -> {
             Log.e(TAG, "onChanged: list size == " + new Gson().toJson(paymentNetworks));
         });
 
