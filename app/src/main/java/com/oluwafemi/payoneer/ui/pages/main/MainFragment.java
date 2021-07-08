@@ -26,7 +26,6 @@ import java.util.List;
 public class MainFragment extends Fragment {
 
     private MainViewModel mViewModel;
-    public static final String TAG = MainFragment.class.getSimpleName();
     private MainFragmentBinding fragmentBinding;
     private UIFactoryAdapter factoryAdapter;
 

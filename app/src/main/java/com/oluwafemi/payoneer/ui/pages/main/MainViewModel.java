@@ -18,7 +18,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainViewModel extends ViewModel {
 
-    public static final String TAG = MainViewModel.class.getSimpleName();
     private final PaymentNetworkUseCase paymentNetworkUseCase;
     private final CompositeDisposable compositeDisposable;
     public MutableLiveData<UIState<List<UIField>>> uiStateLiveData;

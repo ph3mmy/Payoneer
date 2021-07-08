@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.oluwafemi.payoneer.R;
 import com.oluwafemi.payoneer.databinding.FieldImageLabelBinding;
 import com.oluwafemi.payoneer.ui.factory.interfaces.FactoryEventListener;
