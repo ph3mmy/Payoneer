@@ -1,7 +1,10 @@
 package com.oluwafemi.payoneer.ui.factory.model;
 
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.oluwafemi.payoneer.R;
 import com.oluwafemi.payoneer.databinding.FieldImageLabelBinding;
 import com.oluwafemi.payoneer.ui.factory.interfaces.FactoryEventListener;
@@ -21,11 +24,19 @@ public class ImageLabelField extends UIField {
     public void bind(View itemView, FactoryEventListener factoryEventListener) {
         FieldImageLabelBinding binding = FieldImageLabelBinding.bind(itemView);
         binding.textView.setText(label);
+        loadImage(binding.imageView, imageUrl);
         binding.getRoot().setOnClickListener(view -> {
             if (factoryEventListener != null) {
                 factoryEventListener.onItemClick(ImageLabelField.this, null);
             }
         });
+    }
+
+    private void loadImage(ImageView imageView, String imageURL) {
+        Glide.with(imageView.getContext())
+                .load(imageURL)
+                .into(imageView);
+
     }
 
     @Override
