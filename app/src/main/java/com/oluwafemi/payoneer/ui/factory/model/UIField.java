@@ -9,17 +9,12 @@ import com.oluwafemi.payoneer.ui.factory.interfaces.FactoryEventListener;
 public abstract class UIField {
 
     public int layout;
-    private String key;
-    private Object dataSource;
-    private String errorMessage;
-    @Nullable
-    private Object obj;
+    private String key = "";
+    private Object dataSource = new Object();
+    private String errorMessage = "";
 
-    public UIField(int layout, String key, Object dataSource, String errorMessage) {
+    public UIField(int layout) {
         this.layout = layout;
-        this.key = key;
-        this.dataSource = dataSource;
-        this.errorMessage = errorMessage;
     }
 
     public UIField withKey(String key) {
