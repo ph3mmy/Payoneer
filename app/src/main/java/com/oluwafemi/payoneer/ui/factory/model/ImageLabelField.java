@@ -21,9 +21,11 @@ public class ImageLabelField extends UIField {
     public void bind(View itemView, FactoryEventListener factoryEventListener) {
         FieldImageLabelBinding binding = FieldImageLabelBinding.bind(itemView);
         binding.textView.setText(label);
-        binding.getRoot().setOnClickListener( view ->
-                factoryEventListener.onItemClick(ImageLabelField.this, null)
-        );
+        binding.getRoot().setOnClickListener(view -> {
+            if (factoryEventListener != null) {
+                factoryEventListener.onItemClick(ImageLabelField.this, null);
+            }
+        });
     }
 
     @Override

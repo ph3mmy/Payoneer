@@ -7,10 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.pages.main.MainFragment">
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:id="@+id/progressView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <include layout="@layout/error_layout"
+        android:id="@+id/errorLayout"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPayments"
+        android:id="@+id/rvNetworks"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,38 +1,34 @@
 package com.oluwafemi.payoneer.ui.pages.main;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.oluwafemi.domain.PaymentNetwork;
-import com.oluwafemi.payoneer.R;
 import com.oluwafemi.payoneer.databinding.MainFragmentBinding;
 import com.oluwafemi.payoneer.ui.factory.UIState;
-import com.oluwafemi.payoneer.ui.factory.interfaces.FactoryEventListener;
-import com.oluwafemi.payoneer.ui.factory.model.ImageLabelField;
+import com.oluwafemi.payoneer.ui.factory.adapter.UIFactoryAdapter;
 import com.oluwafemi.payoneer.ui.factory.model.UIField;
-import com.oluwafemi.payoneer.ui.pages.PagesFragment;
 import com.oluwafemi.payoneer.ui.vmfactory.PaymentVMFactory;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragment extends PagesFragment {
+public class MainFragment extends Fragment {
 
     private MainViewModel mViewModel;
     public static final String TAG = MainFragment.class.getSimpleName();
+    private MainFragmentBinding fragmentBinding;
+    private UIFactoryAdapter factoryAdapter;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -42,40 +38,80 @@ public class MainFragment extends PagesFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        fragmentBinding = MainFragmentBinding.inflate(inflater, container, false);
+        return fragmentBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setUpView();
         mViewModel = new ViewModelProvider(this, new PaymentVMFactory()).get(MainViewModel.class);
         mViewModel.uiStateLiveData.observe(getViewLifecycleOwner(), this::updateUI);
 
         mViewModel.loadPaymentNetworks();
-        setupClickListener();
+        clickListeners();
     }
 
-    private void setupClickListener() {
-        setEventListener((uiField, param) -> {
-            if (uiField instanceof ImageLabelField) {
-                PaymentNetwork network = (PaymentNetwork) uiField.fieldDataSource();
-            }
-        });
+    private void clickListeners() {
+        fragmentBinding.errorLayout.btnTryAgain.setOnClickListener(view ->
+                mViewModel.loadPaymentNetworks()
+        );
+    }
+
+    private void setUpView() {
+        factoryAdapter = new UIFactoryAdapter(new ArrayList<>(), null);
+        fragmentBinding.rvNetworks.setLayoutManager(
+                new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false)
+        );
+        fragmentBinding.rvNetworks.setAdapter(factoryAdapter);
     }
 
     private void updateUI(UIState<List<UIField>> uiState) {
         switch (uiState.status) {
             case LOADING:
+                showProgress();
                 break;
             case ERROR:
-                Log.e(TAG, "error: " + new Gson().toJson(uiState.error.getMessage()));
+                showError(uiState.error.getMessage());
                 break;
             case SUCCESS:
-                updateUI(uiState.data);
+                updateAdapter(uiState.data);
+                showRecycler();
                 break;
             default:
                 break;
         }
     }
 
+
+    private void showRecycler() {
+        fragmentBinding.progressView.setVisibility(View.GONE);
+        fragmentBinding.rvNetworks.setVisibility(View.VISIBLE);
+        fragmentBinding.errorLayout.errorMain.setVisibility(View.GONE);
+    }
+
+    private void showProgress() {
+        fragmentBinding.progressView.setVisibility(View.VISIBLE);
+        fragmentBinding.rvNetworks.setVisibility(View.GONE);
+        fragmentBinding.errorLayout.errorMain.setVisibility(View.GONE);
+    }
+
+    private void showError(String errorMessage) {
+        fragmentBinding.progressView.setVisibility(View.GONE);
+        fragmentBinding.rvNetworks.setVisibility(View.GONE);
+        fragmentBinding.errorLayout.errorMain.setVisibility(View.VISIBLE);
+
+        fragmentBinding.errorLayout.tvError.setText(errorMessage);
+    }
+
+    protected void updateAdapter(List<UIField> uiFields) {
+        factoryAdapter.updateList(uiFields);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        fragmentBinding = null;
+    }
 }
