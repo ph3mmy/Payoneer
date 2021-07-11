@@ -54,7 +54,7 @@ public abstract class UIField {
     }
 
     @Override
-    public boolean equals(@Nullable @org.jetbrains.annotations.Nullable Object obj) {
+    public boolean equals(@Nullable Object obj) {
         boolean isEqual = false;
         if (obj != null) {
             isEqual = ((UIField)obj).key.equals(this.key);

@@ -101,7 +101,8 @@ public class MainFragment extends Fragment {
         fragmentBinding.rvNetworks.setVisibility(View.GONE);
         fragmentBinding.errorLayout.errorMain.setVisibility(View.VISIBLE);
 
-        fragmentBinding.errorLayout.tvError.setText(errorMessage);
+        String formattedError = String.format("Error:\n %s", errorMessage);
+        fragmentBinding.errorLayout.tvError.setText(formattedError);
     }
 
     protected void updateAdapter(List<UIField> uiFields) {
