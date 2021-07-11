@@ -27,6 +27,7 @@ ext {
     javaxInjectVersion = '1'
     lombokVersion = '1.18.18'
     glideVersion = '4.12.0'
+    daggerHiltVersion = '2.37'
 
     //Testing
     jUnitVersion = '4.12'
@@ -46,7 +47,9 @@ ext {
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
             glide:              "com.github.bumptech.glide:glide:${glideVersion}",
-            glideCompiler:      "com.github.bumptech.glide:compiler:${glideVersion}"
+            glideCompiler:      "com.github.bumptech.glide:compiler:${glideVersion}",
+            daggerHilt:         "com.google.dagger:hilt-android:${daggerHiltVersion}",
+            daggerHiltCompiler: "com.google.dagger:hilt-compiler:${daggerHiltVersion}"
     ]
 
     domainDependencies = [
