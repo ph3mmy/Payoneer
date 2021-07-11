@@ -17,7 +17,7 @@ public class PaymentNetworkRepositoryTest {
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        networkRepository = new PaymentNetworkRepository();
+        networkRepository = new PaymentNetworkRepository(paymentApi, entityMapper);
     }
 
 }

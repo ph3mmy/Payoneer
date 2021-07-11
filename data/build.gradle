@@ -39,13 +39,13 @@ dependencies {
     compileOnly dataDependencies.lombok
     annotationProcessor dataDependencies.lombok
     implementation dataDependencies.javaxInject
-    implementation dataDependencies.retrofit
-    implementation dataDependencies.okHttpLogger
+    api dataDependencies.retrofit
+    api dataDependencies.okHttpLogger
     implementation dataDependencies.gson
     implementation dataDependencies.rxJava
     implementation dataDependencies.rxAndroid
-    implementation dataDependencies.gsonConverter
-    implementation dataDependencies.rxJavaAdapter
+    api dataDependencies.gsonConverter
+    api dataDependencies.rxJavaAdapter
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.mockito

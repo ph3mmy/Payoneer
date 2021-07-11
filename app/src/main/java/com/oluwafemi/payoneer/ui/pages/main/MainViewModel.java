@@ -12,16 +12,21 @@ import com.oluwafemi.payoneer.ui.factory.model.UIField;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+@HiltViewModel
 public class MainViewModel extends ViewModel {
 
     private final PaymentNetworkUseCase paymentNetworkUseCase;
     private final CompositeDisposable compositeDisposable;
     public MutableLiveData<UIState<List<UIField>>> uiStateLiveData;
 
+    @Inject
     public MainViewModel(PaymentNetworkUseCase paymentNetworkUseCase) {
         this.paymentNetworkUseCase = paymentNetworkUseCase;
         this.compositeDisposable = new CompositeDisposable();

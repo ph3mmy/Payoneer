@@ -1,11 +1,15 @@
-package com.oluwafemi.payoneer;
+package com.oluwafemi.payoneer.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.oluwafemi.payoneer.R;
 import com.oluwafemi.payoneer.ui.pages.main.MainFragment;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     @Override

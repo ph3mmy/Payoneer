@@ -6,12 +6,15 @@ import com.oluwafemi.domain.usecase.PaymentNetworkUseCase;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 public class PaymentNetworkUseCaseImpl implements PaymentNetworkUseCase {
 
     private final PaymentRepository paymentRepository;
 
+    @Inject
     public PaymentNetworkUseCaseImpl(PaymentRepository repository) {
         this.paymentRepository = repository;
     }

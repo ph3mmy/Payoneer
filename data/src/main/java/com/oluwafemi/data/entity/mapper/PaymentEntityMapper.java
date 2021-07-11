@@ -7,7 +7,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class PaymentEntityMapper {
+
+    @Inject
+    public PaymentEntityMapper() {}
 
     public PaymentNetwork transform(Applicable applicable) {
         PaymentNetwork paymentNetwork = null;

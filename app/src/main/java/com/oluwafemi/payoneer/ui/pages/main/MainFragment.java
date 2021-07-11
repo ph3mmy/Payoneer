@@ -16,13 +16,15 @@ import com.oluwafemi.payoneer.databinding.MainFragmentBinding;
 import com.oluwafemi.payoneer.ui.factory.UIState;
 import com.oluwafemi.payoneer.ui.factory.adapter.UIFactoryAdapter;
 import com.oluwafemi.payoneer.ui.factory.model.UIField;
-import com.oluwafemi.payoneer.ui.vmfactory.PaymentVMFactory;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainFragment extends Fragment {
 
     private MainViewModel mViewModel;
@@ -45,7 +47,7 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpView();
-        mViewModel = new ViewModelProvider(this, new PaymentVMFactory()).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mViewModel.uiStateLiveData.observe(getViewLifecycleOwner(), this::updateUI);
 
         mViewModel.loadPaymentNetworks();

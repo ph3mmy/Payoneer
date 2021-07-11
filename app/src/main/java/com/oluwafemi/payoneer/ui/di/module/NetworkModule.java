@@ -1,11 +1,19 @@
-package com.oluwafemi.data.network;
+package com.oluwafemi.payoneer.ui.di.module;
 
-import android.util.Log;
+import android.app.Application;
+
+import com.oluwafemi.data.network.api.PaymentApi;
+import com.oluwafemi.payoneer.ui.PayoneerApplication;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
+import dagger.Module;
+import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.components.SingletonComponent;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -13,29 +21,29 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Singleton
-public class RetrofitClient {
+@Module
+@InstallIn(SingletonComponent.class)
+public class NetworkModule {
 
     public static final String API_BASE_URL = "https://raw.githubusercontent.com/";
 
-    public RetrofitClient() {
+    @Provides
+    public PaymentApi providePaymentApi(Retrofit retrofit) {
+        return retrofit.create(PaymentApi.class);
     }
 
-    public <T> T create(Class<T> serviceClass) {
-        return retrofit(okHttpClientBuilder()).create(serviceClass);
-    }
-
-    private Retrofit retrofit(OkHttpClient okHttpClientBuilder) {
+    @Provides
+    public Retrofit providesRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(API_BASE_URL)
-                .client(okHttpClientBuilder)
+                .client(okHttpClient)
                 .build();
     }
 
-    private OkHttpClient okHttpClientBuilder() {
-
+    @Provides
+    public OkHttpClient providesOkHttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
@@ -47,7 +55,6 @@ public class RetrofitClient {
 
             Request original = chain.request();
             Request request = original.newBuilder()
-                    .header("Content-Type", "application/json")
                     .method(original.method(), original.body())
                     .build();
 
@@ -56,5 +63,4 @@ public class RetrofitClient {
 
         return okhttpClientBuilder.build();
     }
-
 }
