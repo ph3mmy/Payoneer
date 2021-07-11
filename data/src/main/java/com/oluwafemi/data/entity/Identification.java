@@ -7,6 +7,6 @@ public class Identification {
 
     private String shortId;
     private String longId;
-    private Integer transactionId;
+    private String transactionId;
 
 }

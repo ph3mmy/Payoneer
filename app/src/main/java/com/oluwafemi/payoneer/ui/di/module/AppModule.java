@@ -7,19 +7,10 @@ import com.oluwafemi.domain.implementation.PaymentNetworkUseCaseImpl;
 import com.oluwafemi.domain.repository.PaymentRepository;
 import com.oluwafemi.domain.usecase.PaymentNetworkUseCase;
 
-import java.util.concurrent.TimeUnit;
-
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ActivityComponent;
 import dagger.hilt.components.SingletonComponent;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 @InstallIn(SingletonComponent.class)

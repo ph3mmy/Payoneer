@@ -1,18 +1,12 @@
 package com.oluwafemi.payoneer.ui.di.module;
 
-import android.app.Application;
-
 import com.oluwafemi.data.network.api.PaymentApi;
-import com.oluwafemi.payoneer.ui.PayoneerApplication;
 
 import java.util.concurrent.TimeUnit;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ActivityComponent;
 import dagger.hilt.components.SingletonComponent;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

@@ -47,6 +47,7 @@ dependencies {
     api dataDependencies.gsonConverter
     api dataDependencies.rxJavaAdapter
 
+    implementation testDependencies.hamcrest
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.mockito
 }
