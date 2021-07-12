@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.oluwafemi.domain.PaymentNetwork;
 import com.oluwafemi.payoneer.databinding.MainFragmentBinding;
 import com.oluwafemi.payoneer.ui.factory.UIState;
 import com.oluwafemi.payoneer.ui.factory.adapter.UIFactoryAdapter;
@@ -68,16 +69,17 @@ public class MainFragment extends Fragment {
         fragmentBinding.rvNetworks.setAdapter(factoryAdapter);
     }
 
-    private void updateUI(UIState<List<UIField>> uiState) {
-        switch (uiState.status) {
+    private void updateUI(UIState<List<PaymentNetwork>> uiState) {
+        switch (uiState.getStatus()) {
             case LOADING:
                 showProgress();
                 break;
             case ERROR:
-                showError(uiState.error.getMessage());
+                showError(uiState.getError().getMessage());
                 break;
             case SUCCESS:
-                updateAdapter(uiState.data);
+                List<UIField> fields = mViewModel.uiFieldsFromPaymentNetworks(uiState.getData());
+                updateAdapter(fields);
                 showRecycler();
                 break;
             default:

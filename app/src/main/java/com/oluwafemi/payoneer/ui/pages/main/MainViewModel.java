@@ -8,6 +8,7 @@ import com.oluwafemi.domain.usecase.PaymentNetworkUseCase;
 import com.oluwafemi.payoneer.ui.factory.UIState;
 import com.oluwafemi.payoneer.ui.factory.model.ImageLabelField;
 import com.oluwafemi.payoneer.ui.factory.model.UIField;
+import com.oluwafemi.payoneer.util.PayoneerScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,42 +16,39 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 @HiltViewModel
 public class MainViewModel extends ViewModel {
 
     private final PaymentNetworkUseCase paymentNetworkUseCase;
     private final CompositeDisposable compositeDisposable;
-    public MutableLiveData<UIState<List<UIField>>> uiStateLiveData;
+    public MutableLiveData<UIState<List<PaymentNetwork>>> uiStateLiveData;
+    private final PayoneerScheduler scheduler;
 
     @Inject
-    public MainViewModel(PaymentNetworkUseCase paymentNetworkUseCase) {
+    public MainViewModel(PaymentNetworkUseCase paymentNetworkUseCase, PayoneerScheduler scheduler) {
         this.paymentNetworkUseCase = paymentNetworkUseCase;
         this.compositeDisposable = new CompositeDisposable();
         this.uiStateLiveData = new MutableLiveData<>();
+        this.scheduler = scheduler;
     }
 
     public void loadPaymentNetworks() {
         compositeDisposable.add(
                 paymentNetworkUseCase.paymentNetworks()
-                        .map(paymentNetworks -> {
-                            List<UIField> uiFields = uiFieldsFromPaymentNetworks(paymentNetworks);
-                           return new UIState<>(UIState.Status.SUCCESS, uiFields, null);
-                        })
-                        .onErrorReturn(error -> new UIState<>(UIState.Status.ERROR, null, error))
-                        .startWith(new UIState<>(UIState.Status.LOADING, null, null))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .map(paymentNetworks -> new UIState<List<PaymentNetwork>>().success(paymentNetworks))
+                        .onErrorReturn(error -> new UIState<List<PaymentNetwork>>().error(error))
+                        .startWith(new UIState<List<PaymentNetwork>>().loading())
+                        .subscribeOn(scheduler.io())
+                        .observeOn(scheduler.androidMain())
                         .subscribe(uiState ->
                                 uiStateLiveData.postValue(uiState)
                         )
         );
     }
 
-    private List<UIField> uiFieldsFromPaymentNetworks(List<PaymentNetwork> paymentNetworks) {
+    public List<UIField> uiFieldsFromPaymentNetworks(List<PaymentNetwork> paymentNetworks) {
         ArrayList<UIField> fieldArrayList = new ArrayList<>();
         for (PaymentNetwork network : paymentNetworks) {
             fieldArrayList.add(

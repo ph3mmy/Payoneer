@@ -1,32 +1,48 @@
 package com.oluwafemi.payoneer.ui.factory;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class UIState<T> {
 
-    public enum Status {
-        LOADING,
-        ERROR,
-        SUCCESS
-    }
+    @NonNull
+    private Status status;
 
-    public final T data;
-    public Throwable error;
-    public Status status;
+    @Nullable
+    private T data;
 
-    public UIState(Status status, T data, Throwable error) {
-        this.data = data;
-        this.error = error;
-        this.status = status;
-    }
-
-    public UIState<T> success(T data) {
-        return new UIState<>(Status.SUCCESS, data, null);
-    }
-
-    public UIState<T> error(Throwable error) {
-        return new UIState<>(Status.ERROR, null, error);
-    }
+    @Nullable
+    private Throwable error;
 
     public UIState<T> loading() {
-        return new UIState<>(Status.LOADING, null, null);
+        this.status = Status.LOADING;
+        this.data = null;
+        this.error = null;
+        return this;
+    }
+
+    public UIState<T> success(@NonNull T data) {
+        this.status = Status.SUCCESS;
+        this.data = data;
+        this.error = null;
+        return this;
+    }
+
+    public UIState<T> error(@NonNull Throwable error) {
+        this.status = Status.ERROR;
+        this.data = null;
+        this.error = error;
+        return this;
+    }
+
+    public enum Status {
+        SUCCESS,
+        ERROR,
+        LOADING
     }
 }

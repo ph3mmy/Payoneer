@@ -45,6 +45,9 @@ dependencies {
     annotationProcessor appDependencies.daggerHiltCompiler
     implementation appDependencies.glide
     annotationProcessor appDependencies.glideCompiler
+
+    compileOnly appDependencies.lombok
+    annotationProcessor appDependencies.lombok
     implementation appDependencies.appCompat
     implementation appDependencies.material
     implementation appDependencies.constraintLayout
@@ -54,8 +57,13 @@ dependencies {
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid
     implementation appDependencies.gson
+    implementation testDependencies.hamcrest
 
     testImplementation testDependencies.jUnit
+    testImplementation testDependencies.archX
+    androidTestImplementation testDependencies.androidCore
+    androidTestImplementation testDependencies.androidTestRunner
+    androidTestImplementation testDependencies.androidTestRule
     androidTestImplementation testDependencies.jUnitExt
     androidTestImplementation testDependencies.espresso
 }
