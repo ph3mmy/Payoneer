@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_no_response">Oops, An error occurred, Server could not return a response at this time, try again</string>
+    <string name="error_server_error">Oops, An error has occurred from one of our servers, we are on it right away. Do check back shortly</string>
+    <string name="error_resource_not_found">Oops, the resource you are looking for could not be found on this server, kindly check and try again</string>
+    <string name="error_unauthorized">Sorry, you do not have the right privilege to carry out this action. Kindly check with admin</string>
+    <string name="error_not_connected">Oops, You do not have an active internet connection. Check your connectivity settings and try again</string>
+</resources>

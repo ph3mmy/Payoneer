@@ -13,6 +13,7 @@ import com.oluwafemi.payoneer.util.PayoneerScheduler;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -48,13 +49,15 @@ public class MainViewModel extends ViewModel {
         );
     }
 
-    public List<UIField> uiFieldsFromPaymentNetworks(List<PaymentNetwork> paymentNetworks) {
+    public List<UIField> uiFieldsFromPaymentNetworks(@Nullable List<PaymentNetwork> paymentNetworks) {
         ArrayList<UIField> fieldArrayList = new ArrayList<>();
-        for (PaymentNetwork network : paymentNetworks) {
-            fieldArrayList.add(
-                    new ImageLabelField(network.getLabel(), network.getLogoUrl())
-                            .withDataSource(network)
-            );
+        if (paymentNetworks != null) {
+            for (PaymentNetwork network : paymentNetworks) {
+                fieldArrayList.add(
+                        new ImageLabelField(network.getLabel(), network.getLogoUrl())
+                                .withDataSource(network)
+                );
+            }
         }
         return fieldArrayList;
     }

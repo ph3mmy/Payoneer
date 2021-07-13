@@ -76,6 +76,8 @@ ext {
             retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             gsonConverter:      "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             rxJavaAdapter:      "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            daggerHilt:         "com.google.dagger:hilt-android:${daggerHiltVersion}",
+            daggerHiltCompiler: "com.google.dagger:hilt-compiler:${daggerHiltVersion}",
             lombok:             "org.projectlombok:lombok:${lombokVersion}"
     ]
 

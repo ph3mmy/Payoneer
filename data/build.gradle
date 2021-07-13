@@ -37,6 +37,8 @@ dependencies {
 
     compileOnly dataDependencies.javaxAnnotation
     compileOnly dataDependencies.lombok
+    implementation dataDependencies.daggerHilt
+    annotationProcessor dataDependencies.daggerHiltCompiler
     annotationProcessor dataDependencies.lombok
     implementation dataDependencies.javaxInject
     api dataDependencies.retrofit

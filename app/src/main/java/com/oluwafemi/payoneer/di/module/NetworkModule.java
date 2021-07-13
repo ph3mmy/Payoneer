@@ -1,6 +1,7 @@
 package com.oluwafemi.payoneer.di.module;
 
 import com.oluwafemi.data.network.api.PaymentApi;
+import com.oluwafemi.data.network.interceptor.NetworkInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public class NetworkModule {
 
-    public static final String API_BASE_URL = "https://raw.githubusercontent.com/";
+    private static final String API_BASE_URL = "https://raw.githubusercontent.com/";
+    private static final long REQUEST_TIMEOUT = 30L;
 
     @Provides
     public PaymentApi providePaymentApi(Retrofit retrofit) {
@@ -37,14 +39,13 @@ public class NetworkModule {
     }
 
     @Provides
-    public OkHttpClient providesOkHttpClient() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    public OkHttpClient providesOkHttpClient(NetworkInterceptor networkInterceptor) {
+
         OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
-        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
-        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
-        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
-        okhttpClientBuilder.addInterceptor(interceptor);
+        okhttpClientBuilder.connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS);
+        okhttpClientBuilder.readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS);
+        okhttpClientBuilder.writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS);
+        okhttpClientBuilder.addInterceptor(networkInterceptor);
         okhttpClientBuilder.addInterceptor(chain -> {
 
             Request original = chain.request();
