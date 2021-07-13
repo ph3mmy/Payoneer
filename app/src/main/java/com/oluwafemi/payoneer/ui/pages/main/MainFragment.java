@@ -13,6 +13,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.oluwafemi.data.exception.NoConnectionException;
+import com.oluwafemi.data.exception.NoResponseException;
+import com.oluwafemi.data.exception.NotFoundException;
+import com.oluwafemi.data.exception.ServerErrorException;
+import com.oluwafemi.data.exception.UnAuthorizedException;
 import com.oluwafemi.data.network.util.NetworkEvent;
 import com.oluwafemi.domain.PaymentNetwork;
 import com.oluwafemi.payoneer.databinding.MainFragmentBinding;
